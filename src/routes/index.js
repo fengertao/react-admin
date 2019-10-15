@@ -18,6 +18,9 @@ export default class CRouter extends Component {
     };
     requireLogin = (component, permission) => {
         const { auth } = this.props;
+        if (!auth || !auth.data) {
+            return <Redirect to={'404'} />;
+        }
         const { permissions } = auth.data;
         if (process.env.NODE_ENV === 'production' && !permissions) {
             // 线上环境判断是否登录

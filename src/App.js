@@ -5,7 +5,6 @@ import SiderCustom from './components/SiderCustom';
 import HeaderCustom from './components/HeaderCustom';
 import { Layout, notification, Icon } from 'antd';
 import { ThemePicker } from './components/widget';
-import { connectAlita } from 'redux-alita';
 
 const { Content, Footer } = Layout;
 
@@ -15,42 +14,35 @@ class App extends Component {
         title: '',
     };
     componentWillMount() {
-        const { setAlitaState } = this.props;
-        const user = JSON.parse(localStorage.getItem('user'));
-        // user && receiveData(user, 'auth');
-        user && setAlitaState({ stateName: 'auth', data: user });
-        // receiveData({a: 213}, 'auth');
-        // fetchData({funcName: 'admin', stateName: 'auth'});
         this.getClientWidth();
         window.onresize = () => {
-            console.log('屏幕变化了');
             this.getClientWidth();
         };
     }
     componentDidMount() {
         const openNotification = () => {
             notification.open({
-                message: '博主-yezihaohao',
+                message: '博主：fengertao',
                 description: (
                     <div>
                         <p>
                             GitHub地址：{' '}
                             <a
-                                href="https://github.com/yezihaohao"
+                                href="https://github.com/fengertao"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                https://github.com/yezihaohao
+                                https://github.com/fengertao
                             </a>
                         </p>
                         <p>
                             博客地址：{' '}
                             <a
-                                href="https://yezihaohao.github.io/"
+                                href="http://blog.warrenfeng.com/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                https://yezihaohao.github.io/
+                                http://blog.warrenfeng.com/
                             </a>
                         </p>
                     </div>
@@ -64,11 +56,10 @@ class App extends Component {
         !isFirst && openNotification();
     }
     getClientWidth = () => {
+        //Todo manage responsive by useContext
         // 获取当前浏览器宽度并设置responsive管理响应式
-        const { setAlitaState } = this.props;
-        const clientWidth = window.innerWidth;
-        console.log(clientWidth);
-        setAlitaState({ stateName: 'responsive', data: { isMobile: clientWidth <= 992 } });
+        // const clientWidth = window.innerWidth;
+        // setAlitaState({ stateName: 'responsive', data: { isMobile: clientWidth <= 992 } });
         // receiveData({isMobile: clientWidth <= 992}, 'responsive');
     };
     toggle = () => {
@@ -79,7 +70,6 @@ class App extends Component {
     render() {
         const { title } = this.state;
         const { auth = { data: {} }, responsive = { data: {} } } = this.props;
-        console.log(auth);
         return (
             <DocumentTitle title={title}>
                 <Layout>
@@ -95,7 +85,7 @@ class App extends Component {
                             <Routes auth={auth} />
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>
-                            React-Admin ©{new Date().getFullYear()} Created by 865470087@qq.com
+                            Sudoku Master ©{new Date().getFullYear()} Created by Charlie Feng
                         </Footer>
                     </Layout>
                 </Layout>
@@ -104,4 +94,4 @@ class App extends Component {
     }
 }
 
-export default connectAlita(['auth', 'responsive'])(App);
+export default App;
