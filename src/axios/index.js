@@ -21,9 +21,7 @@ export const weibo = () =>
 
 export const gitOauthLogin = () =>
     get({
-        url: `${
-            config.GIT_OAUTH
-        }/authorize?client_id=792cdcd244e98dcd2dee&redirect_uri=http://localhost:3006/&scope=user&state=reactAdmin`,
+        url: `${config.GIT_OAUTH}/authorize?client_id=792cdcd244e98dcd2dee&redirect_uri=http://localhost:3006/&scope=user&state=reactAdmin`,
     });
 export const gitOauthToken = code =>
     post({
@@ -39,9 +37,3 @@ export const gitOauthToken = code =>
 // {headers: {Accept: 'application/json'}}
 export const gitOauthInfo = access_token =>
     get({ url: `${config.GIT_USER}access_token=${access_token}` });
-
-// easy-mock数据交互
-// 管理员权限获取
-export const admin = () => get({ url: config.MOCK_AUTH_ADMIN });
-// 访问权限获取
-export const guest = () => get({ url: config.MOCK_AUTH_VISITOR });

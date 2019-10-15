@@ -1,14 +1,13 @@
 /**
- * Created by 叶子 on 2017/7/31.
+ * Copyright (c) 2018-2019,  Charlie Feng. All Rights Reserved.
  */
-import { Component } from 'react';
-import { connectAlita } from 'redux-alita';
 
-class AuthWidget extends Component {
-    render() {
-        const { auth = {} } = this.props;
-        return this.props.children(auth.data || {});
-    }
-}
+import { useContext } from 'react';
+import { AuthContext } from '@/context/AuthContext';
 
-export default connectAlita(['auth'])(AuthWidget);
+const AuthWidget = props => {
+    const { state: authState } = useContext(AuthContext);
+
+    return props.children(authState || {});
+};
+export default AuthWidget;
