@@ -70,7 +70,12 @@ class SiderCustom extends Component {
                 collapsed={collapsed}
                 style={{ overflowY: 'auto' }}
             >
-                <div className="logo" />
+                <div className="logo">
+                    <a id="logo" href="/">
+                        <img alt="logo" src={process.env.PUBLIC_URL + '/favicon.ico'} />
+                        <span style={{ color: 'lightgreen', fontSize: 16 }}>Sudoku Master V2</span>
+                    </a>
+                </div>
                 <SiderMenu
                     menus={routes.menus}
                     onClick={this.menuClick}

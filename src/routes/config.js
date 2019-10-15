@@ -2,6 +2,8 @@ export default {
     menus: [
         // 菜单相关路由
         { key: '/app/dashboard/index', title: '首页', icon: 'mobile', component: 'Dashboard' },
+        { key: '/app/sudoku', title: '数独', icon: 'crown', component: 'Sudoku' },
+
         {
             key: '/app/ui',
             title: 'UI',
@@ -82,7 +84,7 @@ export default {
                     key: '/app/auth/routerEnter',
                     title: '路由拦截',
                     component: 'RouterEnter',
-                    auth: 'auth/testPage',
+                    auth: 'ROLE_ADMIN',
                 },
             ],
         },
