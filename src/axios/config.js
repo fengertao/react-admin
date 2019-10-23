@@ -5,6 +5,7 @@
 const BACKEND_API_URL = 'http://127.0.0.1:8080';
 export const LOGIN_URL = BACKEND_API_URL + '/authenticate';
 export const GRID_URL = BACKEND_API_URL + '/grid';
+export const USER_URL = BACKEND_API_URL + '/user';
 
 // github授权
 export const GIT_OAUTH = 'https://github.com/login/oauth';

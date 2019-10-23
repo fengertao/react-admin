@@ -31,7 +31,18 @@ const Login = props => {
                             props.history.push('/');
                         })
                         .catch(error => {
-                            message.error('Login failure: ' + error.message);
+                            let msg = error.response.data;
+                            switch (error.response.data) {
+                                case 'USER_DISABLED':
+                                    msg = '需要等待管理员激活账户';
+                                    break;
+                                case 'INVALID_CREDENTIALS':
+                                    msg = '账号密码错误';
+                                    break;
+                                default:
+                                    break;
+                            }
+                            message.error('登录失败: ' + msg);
                             setLoading(false);
                         });
                 }
@@ -40,6 +51,12 @@ const Login = props => {
             }
         });
     };
+
+    const handleSignup = e => {
+        e.preventDefault();
+        props.history.push('/signup');
+    };
+
     const gitHub = () => {
         window.location.href =
             'https://github.com/login/oauth/authorize?client_id=792cdcd244e98dcd2dee&redirect_uri=http://localhost:3006/&scope=user&state=reactAdmin';
@@ -50,7 +67,7 @@ const Login = props => {
             <Spin spinning={loading} size="large" tip="登录中...">
                 <div className="login-form">
                     <div className="login-logo">
-                        <span>Sudoku Master</span>
+                        <span>数独大师</span>
                         <PwaInstaller />
                     </div>
                     <Form onSubmit={handleSubmit} style={{ maxWidth: '300px' }}>
@@ -92,9 +109,11 @@ const Login = props => {
                                 登录
                             </Button>
                             <p style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <span>或 现在就去注册!</span>
-                                <span onClick={gitHub}>
-                                    <Icon type="github" />
+                                <span onClick={handleSignup}>
+                                    <Button type="dashed">或 现在就去注册!</Button>
+                                </span>
+                                <span>
+                                    <Icon type="github" onClick={gitHub} />
                                     (第三方登录)
                                 </span>
                             </p>

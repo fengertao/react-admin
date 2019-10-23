@@ -7,6 +7,7 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import NotFound from './components/pages/NotFound';
 import Login from './components/pages/Login';
+import Signup from './components/pages/Signup';
 import App from './App';
 
 export default () => {
@@ -21,6 +22,7 @@ export default () => {
                 <AuthenticatedRoute path="/app" component={App} />
                 <Route path="/404" component={NotFound} />
                 <Route path="/login" component={Login} />
+                <Route path="/signup" component={Signup} />
                 <Route component={NotFound} />
             </Switch>
         </Router>
