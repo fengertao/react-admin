@@ -3,7 +3,8 @@ export default {
         // 菜单相关路由
         { key: '/app/dashboard/index', title: '首页', icon: 'mobile', component: 'Dashboard' },
         { key: '/app/sudoku', title: '数独', icon: 'crown', component: 'Sudoku' },
-
+        { key: '/app/user', title: '用户', icon: 'user', component: 'User' },
+        /*
         {
             key: '/app/ui',
             title: 'UI',
@@ -107,6 +108,7 @@ export default {
                 },
             ],
         },
+        */
     ],
     others: [], // 非菜单相关路由
 };

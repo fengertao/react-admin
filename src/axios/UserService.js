@@ -8,4 +8,8 @@ import { USER_URL } from './config';
 const signup = jsonBody => {
     return axios.post(`${USER_URL}/signup`, jsonBody);
 };
-export { signup };
+
+const getAll = () => {
+    return axios.get(`${USER_URL}/all`);
+};
+export { signup, getAll };
