@@ -20,7 +20,16 @@ const UserTable = props => {
         getAll().then(resp => {
             setLoading(false);
             setData(resp.data);
-        });
+        }).catch(
+            err => {
+                setLoading(false);
+                if (err.response.status === 403) {
+                    message.error("无查询权限");
+                } else {
+                    message.error("查询失败");
+                }
+            }
+        );
     }, []);
 
 

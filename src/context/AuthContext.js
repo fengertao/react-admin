@@ -39,7 +39,7 @@ let reducer = (state, action) => {
         }
         case AuthAction.LOGOUT:
             //Todo logout from backend
-            if (action.data && action.data.interceptor) {
+            if (action.data && action.data.interceptor != null) {
                 teardownAxiosInterceptors(action.data.interceptor);
             }
             return initialState;

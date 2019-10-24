@@ -25,7 +25,6 @@ const HeaderCustom = props => {
         }
     };
     const menuClick = e => {
-        console.log(e);
         e.key === 'logout' && logout();
     };
     const logout = () => {
