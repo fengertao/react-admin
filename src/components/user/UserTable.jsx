@@ -1,14 +1,12 @@
 /**
  * Copyright (c) 2018-2019,  Charlie Feng. All Rights Reserved.
  */
-import React, {useEffect, useState} from 'react';
-import {Icon, message, Popconfirm, Spin, Table} from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Icon, message, Popconfirm, Spin, Table } from 'antd';
 import RoleTag from './RoleTag';
-import {disable, enable, getAll} from '@/axios/UserService';
-
+import { disable, enable, getAll } from '@/axios/UserService';
 
 const UserTable = props => {
-
     let [selectedRowKeys, setSelectedRowKeys] = useState([]);
     let [loading, setLoading] = useState(false);
     let [data, setData] = useState([]);
@@ -17,21 +15,20 @@ const UserTable = props => {
 
     useEffect(() => {
         setLoading(true);
-        getAll().then(resp => {
-            setLoading(false);
-            setData(resp.data);
-        }).catch(
-            err => {
+        getAll()
+            .then(resp => {
                 setLoading(false);
-                if (err.response.status === 403) {
-                    message.error("无查询权限");
+                setData(resp.data);
+            })
+            .catch(err => {
+                setLoading(false);
+                if (err.response && err.response.status) {
+                    message.error('无查询权限');
                 } else {
-                    message.error("查询失败");
+                    message.error('查询失败');
                 }
-            }
-        );
+            });
     }, []);
-
 
     const handleChange = (pagination, filters, sorter) => {
         console.log('Various parameters', pagination, filters, sorter);
@@ -48,25 +45,30 @@ const UserTable = props => {
     };
 
     const handleEnableFlag = (event, record) => {
-        if (record.roles.filter((role) => role.name === "ROLE_ROOT").length > 0) {
-            message.error("禁止对站长操作")
+        if (record.roles.filter(role => role.name === 'ROLE_ROOT').length > 0) {
+            message.error('禁止对站长操作');
         } else {
             setLoading(true);
-            const actionMethod = record.enabled? disable :enable;
+            const actionMethod = record.enabled ? disable : enable;
 
-            actionMethod(record.username).then((resp) => {
-                setLoading(false);
-                setData(data.map((user) => {
-                    if (user.username === record.username) {
-                        return resp.data;
-                    } else {
-                        return user;
-                    }}));
-                message.warn(record.enabled? "禁用成功": "激活成功")}
-            ).catch(ex=> {
-                setLoading(false);
-                message.error(ex.response.data);
-            })
+            actionMethod(record.username)
+                .then(resp => {
+                    setLoading(false);
+                    setData(
+                        data.map(user => {
+                            if (user.username === record.username) {
+                                return resp.data;
+                            } else {
+                                return user;
+                            }
+                        })
+                    );
+                    message.warn(record.enabled ? '禁用成功' : '激活成功');
+                })
+                .catch(ex => {
+                    setLoading(false);
+                    message.error(ex.response.data);
+                });
         }
     };
 
@@ -87,8 +89,8 @@ const UserTable = props => {
             title: '密码',
             dataIndex: 'password',
             render: password => {
-                return password.substr(0, 6) + "...";
-            }
+                return password.substr(0, 6) + '...';
+            },
         },
         {
             title: '邮箱',
@@ -100,23 +102,23 @@ const UserTable = props => {
             title: '角色',
             dataIndex: 'roles',
             filters: [
-                {text: 'Root', value: 'ROLE_ROOT'},
-                {text: 'Admin', value: 'ROLE_ADMIN'},
-                {text: 'Vip', value: 'ROLE_VIP'},
-                {text: 'User', value: 'ROLE_USER'},
-                {text: 'Applicant', value: 'ROLE_APPLICANT'},
-                {text: 'Guest', value: 'ROLE_ANONYMOUS'},
+                { text: 'Root', value: 'ROLE_ROOT' },
+                { text: 'Admin', value: 'ROLE_ADMIN' },
+                { text: 'Vip', value: 'ROLE_VIP' },
+                { text: 'User', value: 'ROLE_USER' },
+                { text: 'Applicant', value: 'ROLE_APPLICANT' },
+                { text: 'Guest', value: 'ROLE_ANONYMOUS' },
             ],
             filteredValue: filteredInfo.roles || null,
-            onFilter: (value, record) => record.roles.filter((role) => role.name === value).length,
+            onFilter: (value, record) => record.roles.filter(role => role.name === value).length,
             sorter: (a, b) => a.roles[0].name > b.roles[0].name,
             sortOrder: sortedInfo.columnKey === 'roles' && sortedInfo.order,
             render: roles => (
                 <span>
-                {roles.map(role => (
-                    <RoleTag key={role.name} role={role} />
-                ))}
-            </span>
+                    {roles.map(role => (
+                        <RoleTag key={role.name} role={role} />
+                    ))}
+                </span>
             ),
         },
         {
@@ -124,9 +126,9 @@ const UserTable = props => {
             dataIndex: 'enabled',
             render: (enabled, record) => (
                 <Popconfirm
-                    title={enabled ? "确认禁用?" : "确认激活?"}
-                    onConfirm={(e) => {
-                        handleEnableFlag(e, record)
+                    title={enabled ? '确认禁用?' : '确认激活?'}
+                    onConfirm={e => {
+                        handleEnableFlag(e, record);
                     }}
                     okText="是"
                     cancelText="否"
@@ -134,10 +136,7 @@ const UserTable = props => {
                     <Icon type={enabled ? 'check-circle' : 'close-circle'} theme="twoTone" />
                 </Popconfirm>
             ),
-            filters: [
-                {text: '已激活', value: true},
-                {text: '未激活', value: false},
-            ],
+            filters: [{ text: '已激活', value: true }, { text: '未激活', value: false }],
             filteredValue: filteredInfo.enabled || null,
             onFilter: (value, record) => record.enabled === value,
             sorter: (a, b) => a.enabled > b.enabled,
@@ -157,5 +156,4 @@ const UserTable = props => {
         </Spin>
     );
 };
-
 export default UserTable;

@@ -6,14 +6,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import Page from './Page';
-import { AuthProvider } from '@/context/AuthContext';
+import {AuthProvider} from '@/context/AuthContext';
+import {ResponsiveProvider} from '@/context/ResponsiveContext';
 import './style/lib/animate.css';
 import './style/antd/index.less';
 import './style/index.less';
 
 ReactDOM.render(
     <AuthProvider>
-        <Page />
+        <ResponsiveProvider>
+            <Page />
+        </ResponsiveProvider>
     </AuthProvider>,
     document.getElementById('root')
 );

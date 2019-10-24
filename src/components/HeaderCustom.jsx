@@ -10,14 +10,16 @@ import SiderCustom from './SiderCustom';
 import { Menu, Icon, Layout, Badge, Popover } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { PwaInstaller } from './widget';
+import {ResponsiveContext} from '@/context/ResponsiveContext';
 
 const { Header } = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 const HeaderCustom = props => {
-    const { state: authState, dispatch } = useContext(AuthContext);
+    const { state: authState, dispatch: authDispatch } = useContext(AuthContext);
     const [visible, setVisible] = useState(false);
+    const {state: responsiveState} = useContext(ResponsiveContext);
 
     const screenFull = () => {
         if (screenfull.enabled) {
@@ -28,7 +30,7 @@ const HeaderCustom = props => {
         e.key === 'logout' && logout();
     };
     const logout = () => {
-        AuthService.logout(authState, dispatch);
+        AuthService.logout(authState, authDispatch);
         props.history.push('/login');
     };
     const popoverHide = () => {
@@ -37,10 +39,10 @@ const HeaderCustom = props => {
     const handleVisibleChange = newVisible => {
         setVisible(newVisible);
     };
-    const { responsive = { data: {} }, path } = props;
+    const { path } = props;
     return (
         <Header className="custom-theme header">
-            {responsive.data.isMobile ? (
+            {responsiveState.isMobile ? (
                 <Popover
                     content={<SiderCustom path={path} popoverHide={popoverHide} />}
                     trigger="click"

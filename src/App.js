@@ -1,25 +1,37 @@
-import React, { Component } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Routes from './routes';
 import DocumentTitle from 'react-document-title';
 import SiderCustom from './components/SiderCustom';
 import HeaderCustom from './components/HeaderCustom';
-import { Layout, notification, Icon } from 'antd';
-import { ThemePicker } from './components/widget';
+import {Icon, Layout, notification} from 'antd';
+import {ThemePicker} from './components/widget';
+import {AuthContext} from '@/context/AuthContext';
+import {ResponsiveContext} from '@/context/ResponsiveContext';
+import {SET_MOBILE_FLAG} from '@/context/ResponsiveAction';
 
 const { Content, Footer } = Layout;
 
-class App extends Component {
-    state = {
-        collapsed: false,
-        title: '',
-    };
-    componentWillMount() {
-        this.getClientWidth();
-        window.onresize = () => {
-            this.getClientWidth();
-        };
-    }
-    componentDidMount() {
+const App = (props) => {
+
+    let [collapsed, setCollapsed] = useState(false);
+    let [title] = useState("Sudoku Master");
+    const {state: authState} = useContext(AuthContext);
+    const {state: responsiveState, dispatch: responsiveDispatch} = useContext(ResponsiveContext);
+
+
+    useEffect(() => {
+            function getClientWidth() {
+                // 获取当前浏览器宽度并设置responsive管理响应式
+                const clientWidth = window.innerWidth;
+                responsiveDispatch({type: SET_MOBILE_FLAG, data: {isMobile: clientWidth <= 992}})
+            };
+            getClientWidth();
+            window.addEventListener('resize', getClientWidth);
+            return () => {window.removeEventListener('resize', getClientWidth);};
+        }, [responsiveDispatch] //this parameter should be useless, just remove verbose startup msg.
+    );
+
+    useEffect(() => {
         const openNotification = () => {
             notification.open({
                 message: '博主：fengertao',
@@ -47,7 +59,7 @@ class App extends Component {
                         </p>
                     </div>
                 ),
-                icon: <Icon type="smile-circle" style={{ color: 'red' }} />,
+                icon: <Icon type="smile-circle" style={{color: 'red'}} />,
                 duration: 0,
             });
             localStorage.setItem('isFirst', JSON.stringify(true));
@@ -55,34 +67,25 @@ class App extends Component {
         const isFirst = JSON.parse(localStorage.getItem('isFirst'));
         !isFirst && openNotification();
     }
-    getClientWidth = () => {
-        //Todo manage responsive by useContext
-        // 获取当前浏览器宽度并设置responsive管理响应式
-        // const clientWidth = window.innerWidth;
-        // setAlitaState({ stateName: 'responsive', data: { isMobile: clientWidth <= 992 } });
-        // receiveData({isMobile: clientWidth <= 992}, 'responsive');
+    );
+
+
+    const toggle = () => {
+        setCollapsed(!collapsed);
     };
-    toggle = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
-        });
-    };
-    render() {
-        const { title } = this.state;
-        const { auth = { data: {} }, responsive = { data: {} } } = this.props;
         return (
             <DocumentTitle title={title}>
                 <Layout>
-                    {!responsive.data.isMobile && <SiderCustom collapsed={this.state.collapsed} />}
+                    {!responsiveState.isMobile && <SiderCustom collapsed={collapsed} />}
                     <ThemePicker />
                     <Layout style={{ flexDirection: 'column' }}>
                         <HeaderCustom
-                            toggle={this.toggle}
-                            collapsed={this.state.collapsed}
-                            user={auth.data || {}}
+                            toggle={toggle}
+                            collapsed={collapsed}
+                            user={authState || {}}
                         />
                         <Content style={{ margin: '0 16px', overflow: 'initial', flex: '1 1 0' }}>
-                            <Routes auth={auth} />
+                            <Routes auth={authState} />
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>
                             Sudoku Master ©{new Date().getFullYear()} Created by Charlie Feng
@@ -91,7 +94,6 @@ class App extends Component {
                 </Layout>
             </DocumentTitle>
         );
-    }
 }
 
 export default App;
