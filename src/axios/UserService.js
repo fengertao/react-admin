@@ -12,4 +12,13 @@ const signup = jsonBody => {
 const getAll = () => {
     return axios.get(`${USER_URL}/all`);
 };
-export { signup, getAll };
+
+const enable = (username) => {
+    return axios.post(`${USER_URL}/enable`, {username});
+}
+
+const disable = (username) => {
+    return axios.post(`${USER_URL}/disable`, {username});
+}
+
+export { signup, getAll, enable, disable };

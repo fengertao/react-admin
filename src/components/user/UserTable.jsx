@@ -1,11 +1,10 @@
 /**
  * Copyright (c) 2018-2019,  Charlie Feng. All Rights Reserved.
  */
-import React, { useState, useEffect } from 'react';
-import { Table, Icon, Spin } from 'antd';
+import React, {useEffect, useState} from 'react';
+import {Icon, message, Popconfirm, Spin, Table} from 'antd';
 import RoleTag from './RoleTag';
-import { getAll } from '@/axios/UserService';
-
+import {disable, enable, getAll} from '@/axios/UserService';
 
 
 const UserTable = props => {
@@ -13,16 +12,14 @@ const UserTable = props => {
     let [selectedRowKeys, setSelectedRowKeys] = useState([]);
     let [loading, setLoading] = useState(false);
     let [data, setData] = useState([]);
-    let [filteredInfo, setFilteredInfo]= useState({});
-    let [sortedInfo, setSortedInfo]= useState({});
+    let [filteredInfo, setFilteredInfo] = useState({});
+    let [sortedInfo, setSortedInfo] = useState({});
 
     useEffect(() => {
         setLoading(true);
         getAll().then(resp => {
             setLoading(false);
-            const data = resp.data;
-            const showData = data.map(user => {return {...user, password: user.password.substr(0, 6) + "..."}});
-            setData(showData);
+            setData(resp.data);
         });
     }, []);
 
@@ -41,6 +38,29 @@ const UserTable = props => {
         onChange: onSelectChange,
     };
 
+    const handleEnableFlag = (event, record) => {
+        if (record.roles.filter((role) => role.name === "ROLE_ROOT").length > 0) {
+            message.error("禁止对站长操作")
+        } else {
+            setLoading(true);
+            const actionMethod = record.enabled? disable :enable;
+
+            actionMethod(record.username).then((resp) => {
+                setLoading(false);
+                setData(data.map((user) => {
+                    if (user.username === record.username) {
+                        return resp.data;
+                    } else {
+                        return user;
+                    }}));
+                message.warn(record.enabled? "禁用成功": "激活成功")}
+            ).catch(ex=> {
+                setLoading(false);
+                message.error(ex.response.data);
+            })
+        }
+    };
+
     const columns = [
         {
             title: '用户名',
@@ -57,6 +77,9 @@ const UserTable = props => {
         {
             title: '密码',
             dataIndex: 'password',
+            render: password => {
+                return password.substr(0, 6) + "...";
+            }
         },
         {
             title: '邮箱',
@@ -68,15 +91,15 @@ const UserTable = props => {
             title: '角色',
             dataIndex: 'roles',
             filters: [
-                { text: 'Root', value: 'ROLE_ROOT' },
-                { text: 'Admin', value: 'ROLE_ADMIN' },
-                { text: 'Vip', value: 'ROLE_VIP' },
-                { text: 'User', value: 'ROLE_USER' },
-                { text: 'Applicant', value: 'ROLE_APPLICANT' },
-                { text: 'Guest', value: 'ROLE_ANONYMOUS' },
+                {text: 'Root', value: 'ROLE_ROOT'},
+                {text: 'Admin', value: 'ROLE_ADMIN'},
+                {text: 'Vip', value: 'ROLE_VIP'},
+                {text: 'User', value: 'ROLE_USER'},
+                {text: 'Applicant', value: 'ROLE_APPLICANT'},
+                {text: 'Guest', value: 'ROLE_ANONYMOUS'},
             ],
             filteredValue: filteredInfo.roles || null,
-            onFilter: (value, record) => record.roles.filter((role) => role.name===value).length,
+            onFilter: (value, record) => record.roles.filter((role) => role.name === value).length,
             sorter: (a, b) => a.roles[0].name > b.roles[0].name,
             sortOrder: sortedInfo.columnKey === 'roles' && sortedInfo.order,
             render: roles => (
@@ -90,12 +113,21 @@ const UserTable = props => {
         {
             title: '激活',
             dataIndex: 'enabled',
-            render: enabled => (
-                <Icon type={enabled ? 'check-circle' : 'close-circle'} theme="twoTone" />
+            render: (enabled, record) => (
+                <Popconfirm
+                    title={enabled ? "确认禁用?" : "确认激活?"}
+                    onConfirm={(e) => {
+                        handleEnableFlag(e, record)
+                    }}
+                    okText="是"
+                    cancelText="否"
+                >
+                    <Icon type={enabled ? 'check-circle' : 'close-circle'} theme="twoTone" />
+                </Popconfirm>
             ),
             filters: [
-                { text: '已激活', value: true },
-                { text: '未激活', value: false },
+                {text: '已激活', value: true},
+                {text: '未激活', value: false},
             ],
             filteredValue: filteredInfo.enabled || null,
             onFilter: (value, record) => record.enabled === value,
@@ -111,7 +143,7 @@ const UserTable = props => {
                 columns={columns}
                 dataSource={data}
                 rowKey="username"
-                onChange = {handleChange}
+                onChange={handleChange}
             />
         </Spin>
     );
