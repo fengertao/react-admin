@@ -86,13 +86,6 @@ const UserTable = props => {
             sortOrder: sortedInfo.columnKey === 'fullName' && sortedInfo.order,
         },
         {
-            title: '密码',
-            dataIndex: 'password',
-            render: password => {
-                return password.substr(0, 6) + '...';
-            },
-        },
-        {
             title: '邮箱',
             dataIndex: 'email',
             sorter: (a, b) => a.email > b.email,
@@ -111,8 +104,6 @@ const UserTable = props => {
             ],
             filteredValue: filteredInfo.roles || null,
             onFilter: (value, record) => record.roles.filter(role => role.name === value).length,
-            sorter: (a, b) => a.roles[0].name > b.roles[0].name,
-            sortOrder: sortedInfo.columnKey === 'roles' && sortedInfo.order,
             render: roles => (
                 <span>
                     {roles.map(role => (
@@ -139,8 +130,6 @@ const UserTable = props => {
             filters: [{ text: '已激活', value: true }, { text: '未激活', value: false }],
             filteredValue: filteredInfo.enabled || null,
             onFilter: (value, record) => record.enabled === value,
-            sorter: (a, b) => a.enabled > b.enabled,
-            sortOrder: sortedInfo.columnKey === 'enabled' && sortedInfo.order,
         },
     ];
 

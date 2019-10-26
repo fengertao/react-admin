@@ -31,8 +31,8 @@ const Login = props => {
                             props.history.push('/');
                         })
                         .catch(error => {
-                            let msg = error.response.data;
-                            switch (error.response.data) {
+                            let msg = error.response ? error.response.data : error.message;
+                            switch (msg) {
                                 case 'USER_DISABLED':
                                     msg = '需要等待管理员激活账户';
                                     break;
