@@ -74,7 +74,7 @@ const Signup = props => {
                             props.history.push('/login');
                         })
                         .catch(error => {
-                            message.error('注册失败: ' + error.message);
+                            message.error('注册失败: ' + ((error.response && error.response.data) ? error.response.data.message : error.message));
                             setLoading(false);
                         });
                 }
