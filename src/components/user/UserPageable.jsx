@@ -4,17 +4,17 @@
 
 import React from 'react';
 import { Row, Col, Card } from 'antd';
-import UserTable from './UserTable';
+import UserTablePageable from './UserTablePageable';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 
-const User = props => (
+const UserPageable = props => (
     <div className="gutter-example">
         <BreadcrumbCustom first="用户" />
         <Row gutter={16}>
             <Col className="gutter-row" md={14}>
                 <div className="gutter-box">
                     <Card title="用户列表" bordered={false}>
-                        <UserTable />
+                        <UserTablePageable />
                     </Card>
                 </div>
             </Col>
@@ -27,4 +27,4 @@ const User = props => (
     </div>
 );
 
-export default User;
+export default UserPageable;

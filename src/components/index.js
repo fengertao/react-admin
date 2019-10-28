@@ -4,7 +4,8 @@
  */
 
 import Sudoku from './sudoku/Sudoku';
-import User from './user/User';
+import UserList from './user/UserList';
+import UserPageable from './user/UserPageable';
 import Loadable from 'react-loadable';
 import Loading from './widget/Loading';
 import BasicForm from './forms/BasicForm';
@@ -39,7 +40,8 @@ const WysiwygBundle = Loadable({
 
 export default {
     Sudoku,
-    User,
+    UserList,
+    UserPageable,
     BasicForm,
     BasicTable,
     AdvancedTable,
