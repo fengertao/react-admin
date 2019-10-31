@@ -22,7 +22,7 @@ const CRouter = props => {
         if (!auth) {
             return <Redirect to={'/login'} />;
         }
-        const {permissions} = auth & auth.permissions;
+        const {permissions} = auth;
         if (process.env.NODE_ENV === 'production' && !permissions) {
             // 线上环境判断是否登录
             return <Redirect to={'/login'} />;

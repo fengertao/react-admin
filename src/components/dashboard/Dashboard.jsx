@@ -6,8 +6,7 @@ import { Row, Col, Card, Timeline, Icon } from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import EchartsViews from './EchartsViews';
 import EchartsProjects from './EchartsProjects';
-import b1 from '../../style/imgs/b1.jpg';
-
+import b1 from '@/style/imgs/avatar_man.svg';
 
 class Dashboard extends React.Component {
     render() {
@@ -87,7 +86,9 @@ class Dashboard extends React.Component {
                                     <h3>任务</h3>
                                     <small>10个已经完成，2个待完成，1个正在进行中</small>
                                 </div>
-                                <span className="card-tool"><Icon type="sync" /></span>
+                                <span className="card-tool">
+                                    <Icon type="sync" />
+                                </span>
                                 <Timeline>
                                     <Timeline.Item color="green">新版本迭代会</Timeline.Item>
                                     <Timeline.Item color="green">完成网站设计初版</Timeline.Item>
@@ -111,42 +112,66 @@ class Dashboard extends React.Component {
                                 <div className="pb-m">
                                     <h3>消息栏</h3>
                                 </div>
-                                <span className="card-tool"><Icon type="sync" /></span>
+                                <span className="card-tool">
+                                    <Icon type="sync" />
+                                </span>
                                 <ul className="list-group no-border">
                                     <li className="list-group-item">
                                         <span className="pull-left w-40 mr-m">
-                                            <img src={b1} className="img-responsive img-circle" alt="test" />
+                                            <img
+                                                src={b1}
+                                                className="img-responsive img-circle"
+                                                alt="test"
+                                            />
                                         </span>
                                         <div className="clear">
-                                            <span className="block">鸣人</span>
-                                            <span className="text-muted">终于当上火影了！</span>
+                                            <span className="block">Charlie</span>
+                                            <span className="text-muted">欢迎光临数独大师！</span>
                                         </div>
                                     </li>
                                     <li className="list-group-item">
                                         <span className="pull-left w-40 mr-m">
-                                            <img src={b1} className="img-responsive img-circle" alt="test" />
+                                            <img
+                                                src={b1}
+                                                className="img-responsive img-circle"
+                                                alt="test"
+                                            />
                                         </span>
                                         <div className="clear">
-                                            <span className="block">佐助</span>
-                                            <span className="text-muted">吊车尾~~</span>
+                                            <span className="block">Charlie</span>
+                                            <span className="text-muted">
+                                                本网站为技术方案测试和演示系统，请勿录入私人信息
+                                            </span>
                                         </div>
                                     </li>
                                     <li className="list-group-item">
                                         <span className="pull-left w-40 mr-m">
-                                            <img src={b1} className="img-responsive img-circle" alt="test" />
+                                            <img
+                                                src={b1}
+                                                className="img-responsive img-circle"
+                                                alt="test"
+                                            />
                                         </span>
                                         <div className="clear">
-                                            <span className="block">小樱</span>
-                                            <span className="text-muted">佐助，你好帅！</span>
+                                            <span className="block">Charlie</span>
+                                            <span className="text-muted">
+                                                首页是静态页面，数独和用户页面已经可以使用
+                                            </span>
                                         </div>
                                     </li>
                                     <li className="list-group-item">
                                         <span className="pull-left w-40 mr-m">
-                                            <img src={b1} className="img-responsive img-circle" alt="test" />
+                                            <img
+                                                src={b1}
+                                                className="img-responsive img-circle"
+                                                alt="test"
+                                            />
                                         </span>
                                         <div className="clear">
-                                            <span className="block">雏田</span>
-                                            <span className="text-muted">鸣人君。。。那个。。。我。。喜欢你..</span>
+                                            <span className="block">Charlie</span>
+                                            <span className="text-muted">
+                                                对本网站的评论请在https://github.com/fengertao/SudokuMasterServ开issue
+                                            </span>
                                         </div>
                                     </li>
                                 </ul>
@@ -160,14 +185,16 @@ class Dashboard extends React.Component {
                                     <h3>访问量统计</h3>
                                     <small>最近7天用户访问量</small>
                                 </div>
-                                <span className="card-tool"><Icon type="sync" /></span>
+                                <span className="card-tool">
+                                    <Icon type="sync" />
+                                </span>
                                 <EchartsViews />
                             </Card>
                         </div>
                     </Col>
                 </Row>
             </div>
-        )
+        );
     }
 }
 

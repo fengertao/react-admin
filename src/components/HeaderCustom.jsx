@@ -5,12 +5,12 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '@/context/AuthContext';
 import * as AuthService from '@/axios/AuthService';
 import screenfull from 'screenfull';
-import avater from '../style/imgs/b1.jpg';
+import avater from '@/style/imgs/avatar_man.svg';
 import SiderCustom from './SiderCustom';
 import { Menu, Icon, Layout, Badge, Popover } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { PwaInstaller } from './widget';
-import {ResponsiveContext} from '@/context/ResponsiveContext';
+import { ResponsiveContext } from '@/context/ResponsiveContext';
 
 const { Header } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -19,7 +19,7 @@ const MenuItemGroup = Menu.ItemGroup;
 const HeaderCustom = props => {
     const { state: authState, dispatch: authDispatch } = useContext(AuthContext);
     const [visible, setVisible] = useState(false);
-    const {state: responsiveState} = useContext(ResponsiveContext);
+    const { state: responsiveState } = useContext(ResponsiveContext);
 
     const screenFull = () => {
         if (screenfull.enabled) {

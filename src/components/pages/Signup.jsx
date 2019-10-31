@@ -74,7 +74,12 @@ const Signup = props => {
                             props.history.push('/login');
                         })
                         .catch(error => {
-                            message.error('注册失败: ' + ((error.response && error.response.data) ? error.response.data.message : error.message));
+                            message.error(
+                                '注册失败: ' +
+                                    (error.response && error.response.data
+                                        ? error.response.data.message
+                                        : error.message)
+                            );
                             setLoading(false);
                         });
                 }
@@ -82,6 +87,11 @@ const Signup = props => {
                 trySignup();
             }
         });
+    };
+
+    const handleLogin = e => {
+        e.preventDefault();
+        props.history.push('/login');
     };
 
     return (
@@ -181,14 +191,22 @@ const Signup = props => {
                                 ],
                             })(
                                 <Checkbox>
-                                    我已经阅读过 <Tooltip title="我爱数独大师">协议</Tooltip>
+                                    <Tooltip title="数独大师为技术验证和演示网站，非商业运营网站。站内包括用户数据在内所有数据等均为公开测试数据。请勿录入私人信息。">
+                                        我已经阅读过协议
+                                    </Tooltip>
                                 </Checkbox>
                             )}
                         </FormItem>
                         <FormItem {...tailFormItemLayout}>
-                            <Button type="primary" htmlType="submit" size="large">
-                                注册
-                            </Button>
+                            <span>
+                                <Button type="primary" htmlType="submit">
+                                    注册
+                                </Button>
+                            </span>
+                            <span>&nbsp;&nbsp;&nbsp;</span>
+                            <span onClick={handleLogin}>
+                                <Button type="link">返回登录页面</Button>
+                            </span>
                         </FormItem>
                     </Form>
                 </div>
