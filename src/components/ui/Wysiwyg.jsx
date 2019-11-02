@@ -1,6 +1,7 @@
 /**
  * Created by hao.cheng on 2017/4/26.
  */
+
 import React, { Component } from 'react';
 import { Row, Col, Card } from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -9,7 +10,44 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
 
-const rawContentState = {"entityMap":{"0":{"type":"IMAGE","mutability":"MUTABLE","data":{"src":"http://i.imgur.com/aMtBIep.png","height":"auto","width":"100%"}}},"blocks":[{"key":"9unl6","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"95kn","text":" ","type":"atomic","depth":0,"inlineStyleRanges":[],"entityRanges":[{"offset":0,"length":1,"key":0}],"data":{}},{"key":"7rjes","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
+const rawContentState = {
+    entityMap: {
+        '0': {
+            type: 'IMAGE',
+            mutability: 'MUTABLE',
+            data: { src: 'http://i.imgur.com/aMtBIep.png', height: 'auto', width: '100%' },
+        },
+    },
+    blocks: [
+        {
+            key: '9unl6',
+            text: '',
+            type: 'unstyled',
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+        },
+        {
+            key: '95kn',
+            text: ' ',
+            type: 'atomic',
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [{ offset: 0, length: 1, key: 0 }],
+            data: {},
+        },
+        {
+            key: '7rjes',
+            text: '',
+            type: 'unstyled',
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+        },
+    ],
+};
 
 class Wysiwyg extends Component {
     state = {
@@ -18,7 +56,7 @@ class Wysiwyg extends Component {
         editorState: '',
     };
 
-    onEditorChange = (editorContent) => {
+    onEditorChange = editorContent => {
         this.setState({
             editorContent,
         });
@@ -30,18 +68,18 @@ class Wysiwyg extends Component {
         });
     };
 
-    onContentStateChange = (contentState) => {
+    onContentStateChange = contentState => {
         console.log('contentState', contentState);
     };
 
-    onEditorStateChange = (editorState) => {
+    onEditorStateChange = editorState => {
         this.setState({
             editorState,
         });
     };
 
-    imageUploadCallBack = file => new Promise(
-        (resolve, reject) => {
+    imageUploadCallBack = file =>
+        new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest(); // eslint-disable-line no-undef
             xhr.open('POST', 'https://api.imgur.com/3/image');
             xhr.setRequestHeader('Authorization', 'Client-ID 8d26ccd12712fca');
@@ -56,8 +94,7 @@ class Wysiwyg extends Component {
                 const error = JSON.parse(xhr.responseText);
                 reject(error);
             });
-        }
-    );
+        });
 
     render() {
         const { editorContent, editorState } = this.state;
@@ -67,7 +104,7 @@ class Wysiwyg extends Component {
                 <Row gutter={16}>
                     <Col className="gutter-row" md={24}>
                         <div className="gutter-box">
-                            <Card title="富文本编辑器" bordered={false} >
+                            <Card title="富文本编辑器" bordered={false}>
                                 <Editor
                                     editorState={editorState}
                                     toolbarClassName="home-toolbar"
@@ -84,10 +121,20 @@ class Wysiwyg extends Component {
                                     onContentStateChange={this.onEditorChange}
                                     placeholder="请输入正文~~尝试@哦，有惊喜"
                                     spellCheck
-                                    onFocus={() => {console.log('focus')}}
-                                    onBlur={() => {console.log('blur')}}
-                                    onTab={() => {console.log('tab'); return true;}}
-                                    localization={{ locale: 'zh', translations: {'generic.add': 'Test-Add'} }}
+                                    onFocus={() => {
+                                        console.log('focus');
+                                    }}
+                                    onBlur={() => {
+                                        console.log('blur');
+                                    }}
+                                    onTab={() => {
+                                        console.log('tab');
+                                        return true;
+                                    }}
+                                    localization={{
+                                        locale: 'zh',
+                                        translations: { 'generic.add': 'Test-Add' },
+                                    }}
                                     mention={{
                                         separator: ' ',
                                         trigger: '@',
@@ -99,7 +146,11 @@ class Wysiwyg extends Component {
                                             { text: 'ABCD', value: 'ABCDDDD', url: 'href-abcd' },
                                             { text: 'ABCDE', value: 'ABCDE', url: 'href-abcde' },
                                             { text: 'ABCDEF', value: 'ABCDEF', url: 'href-abcdef' },
-                                            { text: 'ABCDEFG', value: 'ABCDEFG', url: 'href-abcdefg' },
+                                            {
+                                                text: 'ABCDEFG',
+                                                value: 'ABCDEFG',
+                                                url: 'href-abcdefg',
+                                            },
                                         ],
                                     }}
                                 />
@@ -119,12 +170,16 @@ class Wysiwyg extends Component {
                     </Col>
                     <Col className="gutter-row" md={8}>
                         <Card title="同步转换MarkDown" bordered={false}>
-                            <pre style={{whiteSpace: 'pre-wrap'}}>{draftToMarkdown(editorContent)}</pre>
+                            <pre style={{ whiteSpace: 'pre-wrap' }}>
+                                {draftToMarkdown(editorContent)}
+                            </pre>
                         </Card>
                     </Col>
                     <Col className="gutter-row" md={8}>
                         <Card title="同步转换JSON" bordered={false}>
-                            <pre style={{whiteSpace: 'normal'}}>{JSON.stringify(editorContent)}</pre>
+                            <pre style={{ whiteSpace: 'normal' }}>
+                                {JSON.stringify(editorContent)}
+                            </pre>
                         </Card>
                     </Col>
                 </Row>

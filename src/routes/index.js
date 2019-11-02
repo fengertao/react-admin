@@ -1,20 +1,20 @@
 /**
- * Created by 叶子 on 2017/8/13.
+ * Copyright (c) 2018-2019,  Charlie Feng. All Rights Reserved.
  */
-import React, {useContext} from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+
+import React, { useContext } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import AllComponents from '../components';
 import routesConfig from './config';
 import queryString from 'query-string';
-import {AuthContext} from '@/context/AuthContext';
-
+import { AuthContext } from '@/context/AuthContext';
 
 const CRouter = props => {
-    const {state: auth} = useContext(AuthContext);
+    const { state: auth } = useContext(AuthContext);
 
     const requireAuth = (permission, component) => {
-        const {permissions} = auth.permissions;
+        const { permissions } = auth.permissions;
         if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
         return component;
     };
@@ -22,7 +22,7 @@ const CRouter = props => {
         if (!auth) {
             return <Redirect to={'/login'} />;
         }
-        const {permissions} = auth;
+        const { permissions } = auth;
         if (process.env.NODE_ENV === 'production' && !permissions) {
             // 线上环境判断是否登录
             return <Redirect to={'/login'} />;
@@ -45,17 +45,14 @@ const CRouter = props => {
                                     // 匹配?及其以后字符串
                                     const queryParams = window.location.hash.match(reg);
                                     // 去除?的参数
-                                    const {params} = props.match;
+                                    const { params } = props.match;
                                     Object.keys(params).forEach(key => {
-                                        params[key] =
-                                            params[key] && params[key].replace(reg, '');
+                                        params[key] = params[key] && params[key].replace(reg, '');
                                     });
-                                    props.match.params = {...params};
+                                    props.match.params = { ...params };
                                     const merge = {
                                         ...props,
-                                        query: queryParams
-                                            ? queryString.parse(queryParams[0])
-                                            : {},
+                                        query: queryParams ? queryString.parse(queryParams[0]) : {},
                                     };
                                     // 重新包装组件
                                     const wrappedComponent = (
@@ -77,5 +74,5 @@ const CRouter = props => {
             <Route render={() => <Redirect to="/404" />} />
         </Switch>
     );
-}
-export default CRouter
+};
+export default CRouter;

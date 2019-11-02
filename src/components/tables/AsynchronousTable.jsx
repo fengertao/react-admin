@@ -6,30 +6,39 @@ import { Table, Button, Row, Col, Card } from 'antd';
 import { getBbcNews } from '../../axios';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 
-const columns = [{
-    title: '新闻标题',
-    dataIndex: 'title',
-    width: 100,
-    render: (text, record) => <a href={record.url} target="_blank" rel="noopener noreferrer">{text}</a>
-}, {
-    title: '作者',
-    dataIndex: 'author',
-    width: 80
-}, {
-    title: '发布时间',
-    dataIndex: 'publishedAt',
-    width: 80
-}, {
-    title: '描述',
-    dataIndex: 'description',
-    width: 200
-}];
+const columns = [
+    {
+        title: '新闻标题',
+        dataIndex: 'title',
+        width: 100,
+        render: (text, record) => (
+            <a href={record.url} target="_blank" rel="noopener noreferrer">
+                {text}
+            </a>
+        ),
+    },
+    {
+        title: '作者',
+        dataIndex: 'author',
+        width: 80,
+    },
+    {
+        title: '发布时间',
+        dataIndex: 'publishedAt',
+        width: 80,
+    },
+    {
+        title: '描述',
+        dataIndex: 'description',
+        width: 200,
+    },
+];
 
 class AsynchronousTable extends React.Component {
     state = {
         selectedRowKeys: [], // Check here to configure the default column
         loading: false,
-        data: []
+        data: [],
     };
     componentDidMount() {
         this.start();
@@ -39,11 +48,11 @@ class AsynchronousTable extends React.Component {
         getBbcNews().then(({ articles }) => {
             this.setState({
                 data: articles,
-                loading: false
+                loading: false,
             });
         });
     };
-    onSelectChange = (selectedRowKeys) => {
+    onSelectChange = selectedRowKeys => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
     };
@@ -62,12 +71,25 @@ class AsynchronousTable extends React.Component {
                         <div className="gutter-box">
                             <Card title="异步表格--BBC新闻今日热门" bordered={false}>
                                 <div style={{ marginBottom: 16 }}>
-                                    <Button type="primary" onClick={this.start}
-                                            disabled={loading} loading={loading}
-                                    >Reload</Button>
-                                    <span style={{ marginLeft: 8 }}>{hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}</span>
+                                    <Button
+                                        type="primary"
+                                        onClick={this.start}
+                                        disabled={loading}
+                                        loading={loading}
+                                    >
+                                        Reload
+                                    </Button>
+                                    <span style={{ marginLeft: 8 }}>
+                                        {hasSelected
+                                            ? `Selected ${selectedRowKeys.length} items`
+                                            : ''}
+                                    </span>
                                 </div>
-                                <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} />
+                                <Table
+                                    rowSelection={rowSelection}
+                                    columns={columns}
+                                    dataSource={this.state.data}
+                                />
                             </Card>
                         </div>
                     </Col>

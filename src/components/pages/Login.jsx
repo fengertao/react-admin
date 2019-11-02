@@ -77,7 +77,7 @@ const Login = props => {
                             })(
                                 <Input
                                     prefix={<Icon type="user" style={{ fontSize: 13 }} />}
-                                    placeholder="guest"
+                                    placeholder="demo"
                                 />
                             )}
                         </FormItem>
@@ -88,7 +88,7 @@ const Login = props => {
                                 <Input
                                     prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
                                     type="password"
-                                    placeholder="guest"
+                                    placeholder="demo"
                                 />
                             )}
                         </FormItem>

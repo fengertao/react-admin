@@ -1,6 +1,7 @@
 /**
  * Created by hao.cheng on 2017/4/23.
  */
+
 import React from 'react';
 import { Row, Col, Card, Button, Radio, Icon, Menu, Dropdown } from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -12,10 +13,10 @@ class Buttons extends React.Component {
         iconLoading: false,
     };
 
-    handleSizeChange = (e) => {
+    handleSizeChange = e => {
         this.setState({ size: e.target.value });
     };
-    handleMenuClick = (e) => {
+    handleMenuClick = e => {
         console.log('click', e);
     };
     enterLoading = () => {
@@ -51,14 +52,18 @@ class Buttons extends React.Component {
                         <div className="gutter-box">
                             <Card bordered={false}>
                                 <Button type="primary" shape="circle" icon="search" />
-                                <Button type="primary" icon="search">Search</Button>
+                                <Button type="primary" icon="search">
+                                    Search
+                                </Button>
                                 <Button shape="circle" icon="search" />
                                 <Button icon="search">Search</Button>
                                 <br />
                                 <Button shape="circle" icon="search" />
                                 <Button icon="search">Search</Button>
                                 <Button type="dashed" shape="circle" icon="search" />
-                                <Button type="dashed" icon="search">Search</Button>
+                                <Button type="dashed" icon="search">
+                                    Search
+                                </Button>
                             </Card>
                         </div>
                     </Col>
@@ -70,17 +75,24 @@ class Buttons extends React.Component {
                                     <Radio.Button value="default">Default</Radio.Button>
                                     <Radio.Button value="small">Small</Radio.Button>
                                 </Radio.Group>
-                                <br /><br />
+                                <br />
+                                <br />
                                 <Button type="primary" shape="circle" icon="download" size={size} />
-                                <Button type="primary" icon="download" size={size}>Download</Button>
-                                <Button type="primary" size={size}>Normal</Button>
+                                <Button type="primary" icon="download" size={size}>
+                                    Download
+                                </Button>
+                                <Button type="primary" size={size}>
+                                    Normal
+                                </Button>
                                 <br />
                                 <Button.Group size={size}>
                                     <Button type="primary">
-                                        <Icon type="left" />Backward
+                                        <Icon type="left" />
+                                        Backward
                                     </Button>
                                     <Button type="primary">
-                                        Forward<Icon type="right" />
+                                        Forward
+                                        <Icon type="right" />
                                     </Button>
                                 </Button.Group>
                             </Card>
@@ -109,10 +121,19 @@ class Buttons extends React.Component {
                                     Loading
                                 </Button>
                                 <br />
-                                <Button type="primary" loading={this.state.loading} onClick={this.enterLoading}>
+                                <Button
+                                    type="primary"
+                                    loading={this.state.loading}
+                                    onClick={this.enterLoading}
+                                >
                                     Click me!
                                 </Button>
-                                <Button type="primary" icon="poweroff" loading={this.state.iconLoading} onClick={this.enterIconLoading}>
+                                <Button
+                                    type="primary"
+                                    icon="poweroff"
+                                    loading={this.state.iconLoading}
+                                    onClick={this.enterIconLoading}
+                                >
                                     Click me!
                                 </Button>
                                 <br />
@@ -129,7 +150,7 @@ class Buttons extends React.Component {
                     }
                 `}</style>
             </div>
-        )
+        );
     }
 }
 

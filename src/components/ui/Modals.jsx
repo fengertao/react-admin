@@ -1,6 +1,7 @@
 /**
  * Created by hao.cheng on 2017/4/23.
  */
+
 import React, { Component } from 'react';
 import { Row, Col, Card, Modal, Button } from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -21,13 +22,13 @@ class S extends Component {
             visible: true,
         });
     };
-    handleOk = (e) => {
+    handleOk = e => {
         console.log(e);
         this.setState({
             visible: false,
         });
     };
-    handleCancel = (e) => {
+    handleCancel = e => {
         console.log(e);
         this.setState({
             visible: false,
@@ -50,10 +51,10 @@ class S extends Component {
             });
         }, 2000);
     };
-    setModal1Visible = (modal1Visible) => {
+    setModal1Visible = modal1Visible => {
         this.setState({ modal1Visible });
     };
-    setModal2Visible = (modal2Visible) => {
+    setModal2Visible = modal2Visible => {
         this.setState({ modal2Visible });
     };
     handleCancel2 = () => {
@@ -127,9 +128,14 @@ class S extends Component {
                         <div className="gutter-box">
                             <Card bordered={false}>
                                 <p>
-                                    <Button type="primary" onClick={this.showModal}>基本用法</Button>
-                                    <Modal title="Basic Modal" visible={this.state.visible}
-                                           onOk={this.handleOk} onCancel={this.handleCancel}
+                                    <Button type="primary" onClick={this.showModal}>
+                                        基本用法
+                                    </Button>
+                                    <Modal
+                                        title="Basic Modal"
+                                        visible={this.state.visible}
+                                        onOk={this.handleOk}
+                                        onCancel={this.handleCancel}
                                     >
                                         <p>some contents...</p>
                                         <p>some contents...</p>
@@ -137,12 +143,15 @@ class S extends Component {
                                     </Modal>
                                 </p>
                                 <p>
-                                    <Button type="primary" onClick={this.showModal2}>异步关闭</Button>
-                                    <Modal title="Title of the modal dialog"
-                                           visible={this.state.visible2}
-                                           onOk={this.handleOk2}
-                                           confirmLoading={this.state.confirmLoading2}
-                                           onCancel={this.handleCancel2}
+                                    <Button type="primary" onClick={this.showModal2}>
+                                        异步关闭
+                                    </Button>
+                                    <Modal
+                                        title="Title of the modal dialog"
+                                        visible={this.state.visible2}
+                                        onOk={this.handleOk2}
+                                        confirmLoading={this.state.confirmLoading2}
+                                        onCancel={this.handleCancel2}
                                     >
                                         <p>{this.state.ModalText2}</p>
                                     </Modal>
@@ -157,8 +166,20 @@ class S extends Component {
                                         onOk={this.handleOk3}
                                         onCancel={this.handleCancel3}
                                         footer={[
-                                            <Button key="back" size="large" onClick={this.handleCancel3}>Return</Button>,
-                                            <Button key="submit" type="primary" size="large" loading={this.state.loading3} onClick={this.handleOk3}>
+                                            <Button
+                                                key="back"
+                                                size="large"
+                                                onClick={this.handleCancel3}
+                                            >
+                                                Return
+                                            </Button>,
+                                            <Button
+                                                key="submit"
+                                                type="primary"
+                                                size="large"
+                                                loading={this.state.loading3}
+                                                onClick={this.handleOk3}
+                                            >
                                                 Submit
                                             </Button>,
                                         ]}
@@ -171,9 +192,7 @@ class S extends Component {
                                     </Modal>
                                 </p>
                                 <p>
-                                    <Button onClick={this.showConfirm4}>
-                                        确认框
-                                    </Button>
+                                    <Button onClick={this.showConfirm4}>确认框</Button>
                                 </p>
                                 <p>
                                     <Button onClick={this.info}>信息提示</Button>
@@ -182,7 +201,12 @@ class S extends Component {
                                     <Button onClick={this.warning}>警告</Button>
                                 </p>
                                 <p>
-                                    <Button type="primary" onClick={() => this.setModal1Visible(true)}>距离顶部20px</Button>
+                                    <Button
+                                        type="primary"
+                                        onClick={() => this.setModal1Visible(true)}
+                                    >
+                                        距离顶部20px
+                                    </Button>
                                     <Modal
                                         title="20px to Top"
                                         style={{ top: 20 }}
@@ -194,8 +218,14 @@ class S extends Component {
                                         <p>some contents...</p>
                                         <p>some contents...</p>
                                     </Modal>
-                                    <br /><br />
-                                    <Button type="primary" onClick={() => this.setModal2Visible(true)}>垂直居中</Button>
+                                    <br />
+                                    <br />
+                                    <Button
+                                        type="primary"
+                                        onClick={() => this.setModal2Visible(true)}
+                                    >
+                                        垂直居中
+                                    </Button>
                                     <Modal
                                         title="Vertically centered modal dialog"
                                         wrapClassName="vertical-center-modal"
@@ -213,9 +243,8 @@ class S extends Component {
                     </Col>
                 </Row>
             </div>
-        )
+        );
     }
 }
-
 
 export default S;

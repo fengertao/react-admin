@@ -1,6 +1,7 @@
 /**
  * Created by hao.cheng on 2017/4/26.
  */
+
 import React from 'react';
 import { Row, Col, Card } from 'antd';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
@@ -38,7 +39,7 @@ class Banners extends React.Component {
                     </Col>
                 </Row>
             </div>
-        )
+        );
     }
 }
 

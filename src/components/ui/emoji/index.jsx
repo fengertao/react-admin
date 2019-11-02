@@ -1,15 +1,16 @@
 /**
  * Created by hao.cheng on 2017/4/22.
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import './iconfont';
 
-const Emoji = ({type}) => {
+const Emoji = ({ type }) => {
     const useTag = `<use xlink:href=${'#icon-' + type} />`;
     return (
         <i className="emoji">
-            <svg className="emoji" dangerouslySetInnerHTML={{__html: useTag }} />
+            <svg className="emoji" dangerouslySetInnerHTML={{ __html: useTag }} />
             <style>{`
             .emoji {
                 display: inline-block;
@@ -24,12 +25,11 @@ const Emoji = ({type}) => {
             }
         `}</style>
         </i>
-
     );
 };
 
 Emoji.propTypes = {
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
 };
 
 export default Emoji;

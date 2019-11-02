@@ -1,8 +1,7 @@
 /*
- * *
- *  * Copyright (c) 2018-2019,  Charlie Feng. All Rights Reserved.
- *
+ * Copyright (c) 2018-2019,  Charlie Feng. All Rights Reserved.
  */
+
 import React, { useEffect, useState } from 'react';
 import { Icon, message, Popconfirm, Spin, Table, Pagination } from 'antd';
 import RoleTag from './RoleTag';
@@ -16,7 +15,7 @@ const UserTableable = props => {
     let [sortedInfo, setSortedInfo] = useState({});
     let [pageNumber, setPageNumber] = useState(1);
     let [pageSize, setPageSize] = useState(10);
-    let [totalElements, setTotalElements]= useState(0);
+    let [totalElements, setTotalElements] = useState(0);
 
     useEffect(() => {
         setLoading(true);
@@ -39,9 +38,9 @@ const UserTableable = props => {
             });
     }, [pageNumber]);
 
-    const handlePageChange = (page) => {
+    const handlePageChange = page => {
         console.log('handlePageChange:', page);
-        setPageNumber(page)
+        setPageNumber(page);
     };
 
     const handleChange = (pagination, filters, sorter) => {
@@ -158,14 +157,14 @@ const UserTableable = props => {
                 onChange={handleChange}
                 pagination={false}
             />
-            <div align={"right"}>
-            <Pagination
-                total={totalElements}
-                pageSize={pageSize}
-                showQuickJumper
-                current={pageNumber}
-                onChange={handlePageChange}
-            />
+            <div align={'right'}>
+                <Pagination
+                    total={totalElements}
+                    pageSize={pageSize}
+                    showQuickJumper
+                    current={pageNumber}
+                    onChange={handlePageChange}
+                />
             </div>
         </Spin>
     );

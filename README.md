@@ -1,35 +1,6 @@
-# react-admin([尝试一下在线编辑](https://codesandbox.io/s/react-admin-u9kdb))
+# Sudoku Master
 
-react-admin system solution
-
-<img src="https://raw.githubusercontent.com/yezihaohao/react-admin/master/screenshots/logo.png" alt="logo" width="150" height="53" />
-
-![travis-ci](https://travis-ci.org/yezihaohao/react-admin.svg?branch=master)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-
-### 文档地址：[wiki](https://github.com/yezihaohao/react-admin/wiki)
-
-### 问题和方案汇总：[issue](https://github.com/yezihaohao/react-admin/issues/12)
-
-### 更新日志迁移至[CHANGELOG.md](https://github.com/yezihaohao/react-admin/blob/master/CHANGELOG.md)😁(重要！对于了解项目部分功能和代码很有用！)
-
-### cli 安装和使用 react-admin 🔥
-
-使用 react-admin-creator 快速安装和下载 react-admin 模板来开发项目：
-
-```js
-npm i -g react-admin-creator
-
-react-admin-creator myapp
-```
-
-### 前言
-
-> 网上 react 后台管理开源免费的完整版项目比较少，所以利用空余时间集成了一个版本出来，已放到 GitHub
-> 启动和打包的时间都稍长，请耐心等待两分钟
-
--   [GitHub 地址](https://github.com/yezihaohao/react-admin)
--   [预览地址](https://admiring-dijkstra-34cb29.netlify.com)(已增加响应式，可手机预览 😄)
+数独大师的 UI 由 react-admin 改造而来，在此向 react-admin 的作者表示感谢
 
 ### 依赖模块
 
@@ -94,56 +65,6 @@ react-admin-creator myapp
     -   登录页面(包括 GitHub 第三方登录)
     -   404 页面
 
-### 功能截图
-
-#### 首页
-
-![截图](https://raw.githubusercontent.com/yezihaohao/yezihaohao.github.io/master/imgs/rd1.gif)
-
-#### 按钮图标等
-
-![截图](https://raw.githubusercontent.com/yezihaohao/yezihaohao.github.io/master/imgs/rd2.gif)
-
-#### 轮播图
-
-![截图](https://raw.githubusercontent.com/yezihaohao/yezihaohao.github.io/master/imgs/rd3.gif)
-
-#### 富文本
-
-![截图](https://raw.githubusercontent.com/yezihaohao/yezihaohao.github.io/master/imgs/rd4.gif)
-
-#### 拖拽
-
-![截图](https://raw.githubusercontent.com/yezihaohao/yezihaohao.github.io/master/imgs/rd5.gif)
-
-#### 画廊
-
-![截图](https://raw.githubusercontent.com/yezihaohao/yezihaohao.github.io/master/imgs/rd6.gif)
-
-#### 动画
-
-![截图](https://raw.githubusercontent.com/yezihaohao/yezihaohao.github.io/master/imgs/rd7.gif)
-
-#### 表格
-
-![截图](https://raw.githubusercontent.com/yezihaohao/yezihaohao.github.io/master/imgs/rd8.gif)
-
-#### 表单
-
-![截图](https://raw.githubusercontent.com/yezihaohao/yezihaohao.github.io/master/imgs/rd9.gif)
-
-#### 图表
-
-![截图](https://raw.githubusercontent.com/yezihaohao/yezihaohao.github.io/master/imgs/rd10.gif)
-
-#### 页面
-
-![截图](https://raw.githubusercontent.com/yezihaohao/yezihaohao.github.io/master/imgs/rd11.gif)
-
-#### 菜单拖拽
-
-![截图](https://raw.githubusercontent.com/yezihaohao/react-admin/master/screenshots/menu_draggable.gif)
-
 ### 代码目录
 
 ```js
@@ -158,19 +79,9 @@ react-admin-creator myapp
 |   +-- axios                               ---http请求存放目录
 |   |    --- index.js
 |   +-- components                          ---各式各样的组件存放目录
-|   |    +-- animation                      ---动画组件
+|   |    +-- sudoku                         ---数独组件
 |   |    |    --- ...
-|   |    +-- charts                         ---图表组件
-|   |    |    --- ...
-|   |    +-- dashboard                      ---首页组件
-|   |    |    --- ...
-|   |    +-- forms                          ---表单组件
-|   |    |    --- ...
-|   |    +-- pages                          ---页面组件
-|   |    |    --- ...
-|   |    +-- tables                         ---表格组件
-|   |    |    --- ...
-|   |    +-- ui                             ---ui组件
+|   |    +-- user                           ---用户管理组件
 |   |    |    --- ...
 |   |    --- BreadcrumbCustom.jsx           ---面包屑组件
 |   |    --- HeaderCustom.jsx               ---顶部导航组件
@@ -187,58 +98,34 @@ react-admin-creator myapp
 
 ### 安装运行
 
-##### 1.下载或克隆项目源码
+##### 1.克隆本项目源码
 
-##### 2.yarn 或者 npm 安装相关包文件(首先推荐使用 yarn，国内建议增加淘宝镜像源，不然很慢，你懂的 😁)
+##### 2.在同级目录克隆 SudokuMasterServ 源码
 
-> 有些老铁遇到运行时报错，首先确定下是不是最新稳定版的 nodejs 和 npm 或者 yarn(推荐用 yarn)，切记不要用 cnpn
+##### 3.yarn 或者 npm 安装相关包文件
 
-```js
-// 首推荐使用yarn装包
-yarn or npm i
+```bash
+yarn install
 ```
 
-##### 3.启动项目
+##### 4.启动项目
 
-```js
-yarn start or npm start
+```bash
+yarn start
 ```
 
-##### 4.打包项目
+##### 5.打包 UI 项目
 
-```js
-yarn build or npm run build
+```bash
+# Support bash only
+yarn deploy
 ```
 
-### Q&A(点击问题查看答案)
+##### 6.前后台一起打包
 
-#### 1.[create-react-app 打包项目 run build 增加进度条信息?](https://github.com/yezihaohao/react-admin/issues/12#issuecomment-325383346)
-
-#### 2.[接口跨域了，怎么在本地开发时配置代理?](https://github.com/yezihaohao/react-admin/issues/12#issuecomment-326169055)
-
-#### 3.[在使用 hashRouter 的情况下怎么实现类似锚点跳转?](https://github.com/yezihaohao/react-admin/issues/12#issuecomment-345127221)
-
-#### 4.[怎么添加多页面配置?](https://github.com/yezihaohao/react-admin/issues/12#issuecomment-348088852)
-
-#### 5.[路由传参数接问号怎么传?](https://github.com/yezihaohao/react-admin/issues/12#issuecomment-375583089)
-
-#### 6.[如何兼容 IE 浏览器?](https://github.com/yezihaohao/react-admin/issues/12#issuecomment-510295292)
-
-### License
-
-MIT
-
-### 结尾
-
-该项目会不定时更新，后续时间会添加更多的模块
-
-欢迎和感谢大家 PR~~👏👏
-
-若有问题，可加 QQ 群与我交流
-
--   1 群：264591039（已满）
--   2 群：592688854（已满）
--   3 群：743490497 (已满)
--   4 群：150131600
-
-如果对你有帮助，给个 star 哟~~❤️❤️❤️❤️
+```bash
+cd ../SudokuMasterServ
+mvn clean install
+cd target
+ls -l SudokuMasterServ*.jar
+```

@@ -1,6 +1,7 @@
 /**
  * Created by hao.cheng on 2017/4/26.
  */
+
 import React from 'react';
 import BannerAnim from 'rc-banner-anim';
 import TweenOne, { TweenOneGroup } from 'rc-tween-one';
@@ -28,7 +29,7 @@ class Custom extends React.Component {
             'nextLeave',
             'onMouseEnter',
             'onMouseLeave',
-        ].forEach((method) => this[method] = this[method].bind(this));
+        ].forEach(method => (this[method] = this[method].bind(this)));
     }
 
     onChange(type, int) {
@@ -90,9 +91,11 @@ class Custom extends React.Component {
 
     render() {
         const intArray = this.getNextPrevNumber();
-        const thumbChildren = this.imgArray.map((img, i) =>
-            <span key={i}><i style={{ backgroundImage: `url(${img})` }} /></span>
-        );
+        const thumbChildren = this.imgArray.map((img, i) => (
+            <span key={i}>
+                <i style={{ backgroundImage: `url(${img})` }} />
+            </span>
+        ));
         return (
             <BannerAnim
                 onChange={this.onChange}
@@ -100,9 +103,7 @@ class Custom extends React.Component {
                 onMouseLeave={this.onMouseLeave}
                 prefixCls="custom-arrow-thumb"
             >
-                <Element key="aaa"
-                         prefixCls="banner-user-elem"
-                >
+                <Element key="aaa" prefixCls="banner-user-elem">
                     <BgElement
                         key="bg"
                         className="bg"
@@ -112,7 +113,10 @@ class Custom extends React.Component {
                             backgroundPosition: 'center',
                         }}
                     />
-                    <TweenOne className="banner-user-title" animation={{ y: 30, opacity: 0, type: 'from' }}>
+                    <TweenOne
+                        className="banner-user-title"
+                        animation={{ y: 30, opacity: 0, type: 'from' }}
+                    >
                         Ant Motion Banner
                     </TweenOne>
                     <TweenOne
@@ -122,9 +126,7 @@ class Custom extends React.Component {
                         The Fast Way Use Animation In React
                     </TweenOne>
                 </Element>
-                <Element key="bbb"
-                         prefixCls="banner-user-elem"
-                >
+                <Element key="bbb" prefixCls="banner-user-elem">
                     <BgElement
                         key="bg"
                         className="bg"
@@ -134,7 +136,10 @@ class Custom extends React.Component {
                             backgroundPosition: 'center',
                         }}
                     />
-                    <TweenOne className="banner-user-title" animation={{ y: 30, opacity: 0, type: 'from' }}>
+                    <TweenOne
+                        className="banner-user-title"
+                        animation={{ y: 30, opacity: 0, type: 'from' }}
+                    >
                         Ant Motion Banner
                     </TweenOne>
                     <TweenOne
@@ -144,25 +149,14 @@ class Custom extends React.Component {
                         The Fast Way Use Animation In React
                     </TweenOne>
                 </Element>
-                <Arrow arrowType="prev" key="prev" prefixCls="user-arrow" component={TweenOne}
-                       onMouseEnter={this.prevEnter}
-                       onMouseLeave={this.prevLeave}
-                       animation={{ left: this.state.prevEnter ? 0 : -120 }}
-                >
-                    <div className="arrow" />
-                    <TweenOneGroup
-                        enter={{ opacity: 0, type: 'from' }}
-                        leave={{ opacity: 0 }}
-                        appear={false}
-                        className="img-wrapper" component="ul"
-                    >
-                        <li style={{ backgroundImage: `url(${this.imgArray[intArray[0]]})`}} key={intArray[0]} />
-                    </TweenOneGroup>
-                </Arrow>
-                <Arrow arrowType="next" key="next" prefixCls="user-arrow" component={TweenOne}
-                       onMouseEnter={this.nextEnter}
-                       onMouseLeave={this.nextLeave}
-                       animation={{ right: this.state.nextEnter ? 0 : -120 }}
+                <Arrow
+                    arrowType="prev"
+                    key="prev"
+                    prefixCls="user-arrow"
+                    component={TweenOne}
+                    onMouseEnter={this.prevEnter}
+                    onMouseLeave={this.prevLeave}
+                    animation={{ left: this.state.prevEnter ? 0 : -120 }}
                 >
                     <div className="arrow" />
                     <TweenOneGroup
@@ -172,11 +166,40 @@ class Custom extends React.Component {
                         className="img-wrapper"
                         component="ul"
                     >
-                        <li style={{ backgroundImage: `url(${this.imgArray[intArray[1]]})`}} key={intArray[1]} />
+                        <li
+                            style={{ backgroundImage: `url(${this.imgArray[intArray[0]]})` }}
+                            key={intArray[0]}
+                        />
                     </TweenOneGroup>
                 </Arrow>
-                <Thumb prefixCls="user-thumb" key="thumb" component={TweenOne}
-                       animation={{ bottom: this.state.thumbEnter ? 0 : -70 }}
+                <Arrow
+                    arrowType="next"
+                    key="next"
+                    prefixCls="user-arrow"
+                    component={TweenOne}
+                    onMouseEnter={this.nextEnter}
+                    onMouseLeave={this.nextLeave}
+                    animation={{ right: this.state.nextEnter ? 0 : -120 }}
+                >
+                    <div className="arrow" />
+                    <TweenOneGroup
+                        enter={{ opacity: 0, type: 'from' }}
+                        leave={{ opacity: 0 }}
+                        appear={false}
+                        className="img-wrapper"
+                        component="ul"
+                    >
+                        <li
+                            style={{ backgroundImage: `url(${this.imgArray[intArray[1]]})` }}
+                            key={intArray[1]}
+                        />
+                    </TweenOneGroup>
+                </Arrow>
+                <Thumb
+                    prefixCls="user-thumb"
+                    key="thumb"
+                    component={TweenOne}
+                    animation={{ bottom: this.state.thumbEnter ? 0 : -70 }}
                 >
                     {thumbChildren}
                 </Thumb>

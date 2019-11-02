@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) 2018-2019,  Charlie Feng. All Rights Reserved.
+ */
+
 import React, { useContext, useEffect, useState } from 'react';
 import Routes from './routes';
 import DocumentTitle from 'react-document-title';

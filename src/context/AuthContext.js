@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import {setupAxiosInterceptors, teardownAxiosInterceptors} from '@/axios/AuthService';
+import { setupAxiosInterceptors, teardownAxiosInterceptors } from '@/axios/AuthService';
 import * as AuthAction from './AuthAction';
 
 const AuthContext = React.createContext();

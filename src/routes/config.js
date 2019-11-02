@@ -1,14 +1,21 @@
+/**
+ * Copyright (c) 2018-2019,  Charlie Feng. All Rights Reserved.
+ */
+
 export default {
     menus: [
         // 菜单相关路由
         { key: '/app/dashboard/index', title: '首页', icon: 'mobile', component: 'Dashboard' },
         { key: '/app/sudoku', title: '数独', icon: 'crown', component: 'Sudoku' },
-        { key: '/app/user', title: '用户', icon: 'user',
+        {
+            key: '/app/user',
+            title: '用户',
+            icon: 'user',
             subs: [
                 { key: '/app/user/full', title: '用户列表', component: 'UserList' },
                 { key: '/app/user/pageable', title: '分页查询', component: 'UserPageable' },
-
-            ]},
+            ],
+        },
         /*
         {
             key: '/app/ui',

@@ -5,56 +5,63 @@ import React from 'react';
 import { Row, Col, Card, Table, Popconfirm, Button } from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 
-
 class ExampleAnimations extends React.Component {
     constructor(props) {
         super(props);
-        this.columns = [{
-            title: 'name',
-            dataIndex: 'name',
-            width: '30%'
-        }, {
-            title: 'age',
-            dataIndex: 'age',
-        }, {
-            title: 'address',
-            dataIndex: 'address',
-        }, {
-            title: 'operation',
-            dataIndex: 'operation',
-            render: (text, record, index) => {
-                return (
-                    this.state.dataSource.length > 1 ?
-                        (
-                            <Popconfirm title="Sure to delete?" onConfirm={() => this.onDelete(record, index)}>
-                                <span>Delete</span>
-                            </Popconfirm>
-                        ) : null
-                );
+        this.columns = [
+            {
+                title: 'name',
+                dataIndex: 'name',
+                width: '30%',
             },
-        }];
+            {
+                title: 'age',
+                dataIndex: 'age',
+            },
+            {
+                title: 'address',
+                dataIndex: 'address',
+            },
+            {
+                title: 'operation',
+                dataIndex: 'operation',
+                render: (text, record, index) => {
+                    return this.state.dataSource.length > 1 ? (
+                        <Popconfirm
+                            title="Sure to delete?"
+                            onConfirm={() => this.onDelete(record, index)}
+                        >
+                            <span>Delete</span>
+                        </Popconfirm>
+                    ) : null;
+                },
+            },
+        ];
         this.state = {
-            dataSource: [{
-                key: '0',
-                name: 'Edward King 0',
-                age: '32',
-                address: 'London, Park Lane no. 0',
-            }, {
-                key: '1',
-                name: 'Edward King 1',
-                age: '32',
-                address: 'London, Park Lane no. 1',
-            }],
+            dataSource: [
+                {
+                    key: '0',
+                    name: 'Edward King 0',
+                    age: '32',
+                    address: 'London, Park Lane no. 0',
+                },
+                {
+                    key: '1',
+                    name: 'Edward King 1',
+                    age: '32',
+                    address: 'London, Park Lane no. 1',
+                },
+            ],
             count: 2,
-            deleteIndex: -1
+            deleteIndex: -1,
         };
     }
     onDelete = (record, index) => {
         const dataSource = [...this.state.dataSource];
         dataSource.splice(index, 1);
-        this.setState({ deleteIndex: record.key});
+        this.setState({ deleteIndex: record.key });
         setTimeout(() => {
-            this.setState({ dataSource })
+            this.setState({ dataSource });
         }, 500);
     };
     handleAdd = () => {
@@ -80,13 +87,16 @@ class ExampleAnimations extends React.Component {
                     <Col className="gutter-row" md={24}>
                         <div className="gutter-box">
                             <Card bordered={false}>
-                                <Button className="editable-add-btn mb-s" onClick={this.handleAdd}>Add</Button>
+                                <Button className="editable-add-btn mb-s" onClick={this.handleAdd}>
+                                    Add
+                                </Button>
                                 <Table
                                     bordered
                                     dataSource={dataSource}
                                     columns={columns}
                                     rowClassName={(record, index) => {
-                                        if (this.state.deleteIndex === record.key) return 'animated zoomOutLeft min-black';
+                                        if (this.state.deleteIndex === record.key)
+                                            return 'animated zoomOutLeft min-black';
                                         return 'animated fadeInRight';
                                     }}
                                 />
@@ -95,7 +105,7 @@ class ExampleAnimations extends React.Component {
                     </Col>
                 </Row>
             </div>
-        )
+        );
     }
 }
 

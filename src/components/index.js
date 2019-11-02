@@ -1,6 +1,6 @@
 /**
  * 路由组件出口文件
- * yezi 2018年6月24日
+ * Copyright (c) 2018-2019,  Charlie Feng. All Rights Reserved.
  */
 
 import Sudoku from './sudoku/Sudoku';

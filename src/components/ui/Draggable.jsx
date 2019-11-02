@@ -1,6 +1,7 @@
 /**
  * Created by hao.cheng on 2017/4/28.
  */
+
 import React from 'react';
 import { Row, Col, Card } from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -10,11 +11,13 @@ class Drags extends React.Component {
     state = {
         activeDrags: 0,
         deltaPosition: {
-            x: 0, y: 0
+            x: 0,
+            y: 0,
         },
         controlledPosition: {
-            x: -400, y: 200
-        }
+            x: -400,
+            y: 200,
+        },
     };
     onStart = () => {
         let { activeDrags } = this.state;
@@ -25,17 +28,17 @@ class Drags extends React.Component {
         this.setState({ activeDrags: --activeDrags });
     };
     handleDrag = (e, ui) => {
-        const {x, y} = this.state.deltaPosition;
+        const { x, y } = this.state.deltaPosition;
         this.setState({
             deltaPosition: {
                 x: x + ui.deltaX,
                 y: y + ui.deltaY,
-            }
+            },
         });
     };
     render() {
-        const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
-        const {deltaPosition} = this.state;
+        const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
+        const { deltaPosition } = this.state;
         return (
             <div className="gutter-example button-demo">
                 <BreadcrumbCustom first="UI" second="拖拽" />
@@ -44,7 +47,6 @@ class Drags extends React.Component {
                         <div className="gutter-box">
                             <Draggable zIndex={100} {...dragHandlers}>
                                 <Card bordered={false} className={'dragDemo'}>
-
                                     I can be dragged anywhere
                                 </Card>
                             </Draggable>
@@ -73,7 +75,10 @@ class Drags extends React.Component {
                             <Draggable onDrag={this.handleDrag} {...dragHandlers}>
                                 <Card bordered={false} className={'dragDemo'}>
                                     <div>I track my deltas</div>
-                                    <div>x: {deltaPosition.x.toFixed(0)}, y: {deltaPosition.y.toFixed(0)}</div>
+                                    <div>
+                                        x: {deltaPosition.x.toFixed(0)}, y:{' '}
+                                        {deltaPosition.y.toFixed(0)}
+                                    </div>
                                 </Card>
                             </Draggable>
                         </div>
@@ -82,7 +87,9 @@ class Drags extends React.Component {
                         <div className="gutter-box">
                             <Draggable handle="strong" {...dragHandlers}>
                                 <Card bordered={false} className={'dragDemo no-cursor'}>
-                                    <strong className="cursor-move"><div>Drag here</div></strong>
+                                    <strong className="cursor-move">
+                                        <div>Drag here</div>
+                                    </strong>
                                     <div>You must click my handle to drag me</div>
                                 </Card>
                             </Draggable>
@@ -92,7 +99,9 @@ class Drags extends React.Component {
                         <div className="gutter-box">
                             <Draggable cancel="strong" {...dragHandlers}>
                                 <Card bordered={false} className={'dragDemo'}>
-                                    <strong className="no-cursor"><div>Can't drag here</div></strong>
+                                    <strong className="no-cursor">
+                                        <div>Can't drag here</div>
+                                    </strong>
                                     <div>Dragging here works</div>
                                 </Card>
                             </Draggable>
@@ -100,7 +109,11 @@ class Drags extends React.Component {
                     </Col>
                     <Col className="gutter-row" md={6}>
                         <div className="gutter-box">
-                            <Draggable bounds={{top: -100, left: -100, right: 100, bottom: 100}} zIndex={5} {...dragHandlers}>
+                            <Draggable
+                                bounds={{ top: -100, left: -100, right: 100, bottom: 100 }}
+                                zIndex={5}
+                                {...dragHandlers}
+                            >
                                 <Card bordered={false} className={'dragDemo'}>
                                     <div>I can only be moved 100px in any direction.</div>
                                 </Card>
@@ -114,9 +127,8 @@ class Drags extends React.Component {
                     }
                 `}</style>
             </div>
-        )
+        );
     }
 }
-
 
 export default Drags;
