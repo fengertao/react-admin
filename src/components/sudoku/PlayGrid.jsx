@@ -2,7 +2,9 @@
  * Copyright (c) 2018-2019,  Charlie Feng. All Rights Reserved.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { SudokuContext } from '@/context/SudokuContext';
+import { updateResult } from '@/context/SudokuAction';
 import GridService from '../../axios/GridService';
 import Cell from './Cell';
 import { Button, Form, message, Modal, Input, Spin } from 'antd';
@@ -78,6 +80,7 @@ const CreateGridForm = Form.create()(props => {
 });
 
 const PlayGrid = () => {
+    let { dispatch: sudokuDispatch } = useContext(SudokuContext);
     const [gridId, setGridId] = useState(DEMO_GRID);
     const [, setPlaced] = useState(DEMO_GRID);
     const [cell, setCell] = useState(Array.from(DEMO_GRID));
@@ -123,13 +126,14 @@ const PlayGrid = () => {
             await GridService.tryResolve(gridId)
                 .then(response => {
                     if ((response.status === 200) & (response.data.resolved === true)) {
-                        setCell(Array.from(response.data.result));
-                        setPlaced(response.data.result);
+                        setCell(Array.from(response.data.answer));
+                        setPlaced(response.data.answer);
                         message.success('Grid Resolved!');
                     } else {
-                        setCell(Array.from(response.data.result));
+                        setCell(Array.from(response.data.answer));
                         message.warn('Grid not resolved');
                     }
+                    sudokuDispatch(updateResult(response.data));
                 })
                 .catch(error => {
                     message.error(error.message);

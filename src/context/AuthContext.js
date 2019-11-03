@@ -13,7 +13,7 @@ const initialState = {};
 const mockState = {
     username: 'charlie',
     token:
-        'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjaGFybGllIiwiZXhwIjoxNTcyODQ2MTM5LCJpYXQiOjE1NzIyNDEzMzl9.nNTZT-WaI-PwSja8SValUAdQIZOqkyN7LZZu1z4k1XCcpQW89PXU1cKQQwAefLQL0FJQPBc7TfUv9MfkgghmRg',
+        'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjaGFybGllIiwiZXhwIjoxNTczNDUzNDY5LCJpYXQiOjE1NzI4NDg2Njl9.XiL_BjUYNt0cjsdNjmqWHAeisGwg06zRuA8Rksl1jOVa4TgC0fW_PBT4wiWarbuZFYe4Xy6UZHH7j-YMHxsAfw',
     permissions: ['ROLE_ROOT', 'ROLE_ADMIN'],
 };
 

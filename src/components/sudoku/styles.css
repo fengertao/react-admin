@@ -2,17 +2,6 @@
  * Copyright (c) 2018-2019,  Charlie Feng. All Rights Reserved.
  */
 
-.busy {
-    display: none;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    z-index: 100;
-    background-color: rgba(30, 30, 30, 0.5);
-}
-
 .gridFg {
     position: relative;
     z-index: 1;
@@ -199,7 +188,6 @@ td.word9 {
     font-size: 21pt;
     height: 40px;
     text-align: center;
-    /*background:alph;*/
     background-color: transparent;
     color: black;
 }
@@ -214,7 +202,6 @@ td.word9 {
     font-size: 21pt;
     height: 40px;
     text-align: center;
-    /*background:alph;*/
     color: red;
     background-color: transparent;
 }
@@ -229,7 +216,6 @@ td.word9 {
     font-size: 21pt;
     height: 40px;
     text-align: center;
-    /*background:alph;*/
     color: orange;
     background-color: transparent;
 }
@@ -244,7 +230,6 @@ td.word9 {
     font-size: 21pt;
     height: 40px;
     text-align: center;
-    /*background:alph;*/
     color: yellow;
     background-color: transparent;
 }
@@ -259,7 +244,6 @@ td.word9 {
     font-size: 21pt;
     height: 40px;
     text-align: center;
-    /*background:alph;*/
     color: lightgreen;
     background-color: transparent;
 }
@@ -274,7 +258,6 @@ td.word9 {
     font-size: 21pt;
     height: 40px;
     text-align: center;
-    /*background:alph;*/
     color: cyan;
     background-color: transparent;
 }
@@ -289,7 +272,6 @@ td.word9 {
     font-size: 21pt;
     height: 40px;
     text-align: center;
-    /*background:alph;*/
     color: lightblue;
     background-color: transparent;
 }
@@ -304,7 +286,6 @@ td.word9 {
     font-size: 21pt;
     height: 40px;
     text-align: center;
-    /*background:alph;*/
     color: gold;
     background-color: transparent;
 }
@@ -319,7 +300,6 @@ td.word9 {
     font-size: 21pt;
     height: 40px;
     text-align: center;
-    /*background:alph;*/
     color: pink;
     background-color: transparent;
 }
@@ -334,27 +314,10 @@ td.word9 {
     font-size: 21pt;
     height: 40px;
     text-align: center;
-    /*background:alph;*/
     color: white;
     background-color: transparent;
 }
 
-.d0 {
-    border-right: 0;
-    border-left: 0;
-    border-top: 0;
-    border-bottom: 0;
-    margin: 0;
-    width: 40px;
-    line-height: 40px;
-    font-family: lucida handwriting, comic sans ms, cursive;
-    height: 40px;
-    text-align: center;
-    background: alph;
-    background-color: transparent;
-    color: white;
-    font-size: 14pt;
-}
 .w1 {
     border-right: 0;
     border-left: 0;
@@ -516,35 +479,74 @@ td.word9 {
     color: white;
     font-size: 10pt;
 }
-.d0 {
-    border-right: 0px;
-    border-left: 0px;
-    border-top: 0px;
-    border-bottom: 0px;
-    margin: 0px;
+td.d0 {
+    border-left: 0 solid;
+    border-bottom: 0 solid;
+    border-right: 0 solid;
+    border-top: 0 solid;
     width: 40px;
-    line-height: 40px;
-    font-family: lucida handwriting, comic sans ms, cursive;
+    line-height: 13px;
     height: 40px;
     text-align: center;
-    background: alph;
-    background-color: transparent;
     color: white;
-    font-size: 8pt;
+    font-size: 11pt;
+    font-family: 'Cascadia Code', Consolas, 'Courier New', monospace;
+    padding: 0px;
 }
-.button {
-    color: white;
-    background-color: green;
-    border: none;
-    display: inline-block;
-    padding: 8px 16px;
-    vertical-align: middle;
-    overflow: hidden;
-    text-decoration: none;
-    text-align: center;
-    cursor: pointer;
-    white-space: nowrap;
+.slowlyBlink {
+    animation: slowlyBlink 3s infinite;
 }
-.button:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+@keyframes slowlyBlink {
+    from {
+        opacity: 1;
+    }
+    25% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.25;
+    }
+    75% {
+        opacity: 1;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.ripple {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0; /*圆形放大的同时，透明度逐渐减小为0*/
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+}
+
+.ripple span {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 0;
+    bottom: 0;
+    background: darkblue;
+    border-radius: 50%;
+    animation: ripple 3s linear infinite;
+    z-index: -2;
+}
+.ripple span:nth-child(2) {
+    animation-delay: 1.5s; /*第二个span动画延迟1.5秒*/
 }
